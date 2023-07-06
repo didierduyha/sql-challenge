@@ -6,37 +6,41 @@
 --	titles;
 
 CREATE TABLE IF NOT EXISTS departments (
-	dept_no SERIAL PRIMARY KEY,
+	dept_no CHAR(4) NOT NULL PRIMARY KEY,
 	dept_name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS dept_emp(
-	emp_no SERIAL PRIMARY KEY,
-	dept_no CHAR(4) NOT NULL
+	emp_no CHAR(6) NOT NULL,
+	dept_no CHAR(4) NOT NULL,
+	PRIMARY KEY (emp_no, dept_no)
 );
 
 CREATE TABLE IF NOT EXISTS dept_manager(
-	dept_no SERIAL PRIMARY KEY,
-	emp_no CHAR(6)NOT NULL
+	dept_no CHAR(4) NOT NULL,
+	emp_no CHAR(6) NOT NULL,
+	PRIMARY KEY (dept_no, emp_no)
 );
 
 CREATE TABLE IF NOT EXISTS employees(
-	emp_no SERIAL PRIMARY KEY,
+	emp_no CHAR(6) PRIMARY KEY,
 	emp_title CHAR(5) NOT NULL,
 	birth_date VARCHAR(10),
 	first_name VARCHAR(30) NOT NULL,
 	last_name VARCHAR(30) NOT NULL,
 	sex CHAR,
-	hire_date VARCHAR(10)
+	hire_date VARCHAR(10),
+	FOREIGN KEY (emp_title) REFERENCES titles(title_id)
 );
 
 CREATE TABLE IF NOT EXISTS salaries(
-	emp_no SERIAL PRIMARY KEY,
-	salary INT
+	emp_no CHAR(6),
+	salary INT,
+	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
 
 CREATE TABLE IF NOT EXISTS titles(
-	title_id SERIAL PRIMARY KEY,
+	title_id INT PRIMARY KEY,
 	title VARCHAR(30)
 );
 

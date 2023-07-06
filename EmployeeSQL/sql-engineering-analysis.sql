@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS employees(
 );
 
 CREATE TABLE IF NOT EXISTS salaries(
-	emp_no CHAR(6),
+	emp_no CHAR(6) PRIMARY KEY,
 	salary INT,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
